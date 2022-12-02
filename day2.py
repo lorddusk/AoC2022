@@ -40,3 +40,41 @@ def part_one():
             score_player_two += loss
 
     print(f"According to the strategy guide, your score would be **{score_player_two}**.")
+
+
+def part_two():
+    score_player_one = 0
+    score_player_two = 0
+    inputs_player_one, inputs_player_two = rock_paper_scissors()
+    for x, y in zip(inputs_player_one, inputs_player_two):
+        one = player_one[x]
+        two = player_two[y]
+
+        score_player_one += one
+
+        if two == 2:
+            score_player_one += draw
+            score_player_two += draw
+            score_player_two += one
+
+        if two == 3:
+            if one == 1:
+                score_player_two += 2
+            if one == 2:
+                score_player_two += 3
+            if one == 3:
+                score_player_two += 1
+            score_player_one += loss
+            score_player_two += win
+
+        if two == 1:
+            if one == 1:
+                score_player_two += 3
+            if one == 2:
+                score_player_two += 1
+            if one == 3:
+                score_player_two += 2
+            score_player_one += win
+            score_player_two += loss
+
+    print(f"According to the actual strategy guide, your score would be **{score_player_two}**.")
