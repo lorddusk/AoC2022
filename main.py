@@ -16,6 +16,8 @@ def run():
 
     print("Day 3, Part 1:", end=" ")
     day3.part_one()
+    print("Day 3, Part 2:", end=" ")
+    day3.part_two()
 
 
 if __name__ == "__main__":

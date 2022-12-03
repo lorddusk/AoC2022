@@ -27,8 +27,15 @@ def part_one():
     priorities = 0
     for rucksack in rucksacks:
         length = len(rucksack)
-        compartment_one = rucksack[slice(0, length // 2)]
-        compartment_two = rucksack[slice(length // 2, length)]
-        common = list(set(compartment_one) & set(compartment_two))[0]
+        common = list(set.intersection(*map(set, [rucksack[slice(0, length // 2)], rucksack[slice(length // 2, length)]])))[0]
+        priorities += priority_values[common]
+    print(f"The sum of the priorities is **{priorities}**")
+
+
+def part_two():
+    rucksacks = get_rucksacks()
+    priorities = 0
+    for group in range(0, len(rucksacks), 3):
+        common = list(set.intersection(*map(set, rucksacks[group:group+3])))[0]
         priorities += priority_values[common]
     print(f"The sum of the priorities is **{priorities}**")
