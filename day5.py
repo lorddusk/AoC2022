@@ -50,4 +50,22 @@ def part_one():
 
 
 def part_two():
-    print(f"The crate sequence that ends up on top is  **{0}**")
+    crates, assignments = get_crates()
+
+    for i in range(0, len(assignments[0])):
+        move = int(assignments[0][i])
+        _from = int(assignments[1][i]) - 1
+        to = int(assignments[2][i]) - 1
+        to_move = []
+        while move > 0:
+            to_move.append(crates[_from].pop(0))
+            move -= 1
+        to_move.reverse()
+
+        for crate_to_move in to_move:
+            crates[to].insert(0, crate_to_move)
+
+    string = ""
+    for x in crates:
+        string += x[0]
+    print(f"The crate sequence that ends up on top is **{string}**")
