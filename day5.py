@@ -7,7 +7,7 @@ def get_crates():
     # string_input = ["    [D]    ",
     #          "[N] [C]    ",
     #          "[Z] [M] [P]",
-    #          "1   2   3",
+    #          " 1   2   3",
     #          "",
     #          "move 1 from 2 to 1",
     #          "move 3 from 1 to 3",
@@ -19,12 +19,12 @@ def get_crates():
 
     for line in string_input:
         if not line.startswith("move") and not line.startswith(" 1"):
-            actual_line = line.replace("    ",".").replace(" ","").replace("[","").replace("]","")
+            actual_line = line.replace("    ", ".").replace(" ", "").replace("[", "").replace("]", "")
             for i in range(0, len(actual_line)):
                 if actual_line[i] != ".":
                     crates[i].append(actual_line[i])
-        if line.startswith("move"):
-            assignment_line = line.replace("move ", "").replace("from ","").replace("to ","").split(" ")
+        elif line.startswith("move"):
+            assignment_line = line.replace("move ", "").replace("from ", "").replace("to ", "").split(" ")
             assignments[0].append(assignment_line[0])
             assignments[1].append(assignment_line[1])
             assignments[2].append(assignment_line[2])
@@ -34,23 +34,18 @@ def get_crates():
 
 def part_one():
     crates, assignments = get_crates()
-    print(crates)
-    for i in range(0, len(assignments) + 1):
+
+    for i in range(0, len(assignments[0])):
         move = int(assignments[0][i])
         _from = int(assignments[1][i]) - 1
         to = int(assignments[2][i]) - 1
-        for j in range(move, 0, -1):
-            crate = crates[_from][0]
-            crates[_from].remove(crate)
-            crates[to].insert(0, crate)
+        while move > 0:
+            crates[to].insert(0, crates[_from].pop(0))
+            move -= 1
 
-    print(crates)
     string = ""
     for x in crates:
-        try:
-            string += x[0]
-        except:
-            pass
+        string += x[0]
     print(f"The crate sequence that ends up on top is **{string}**")
 
 
