@@ -1,7 +1,4 @@
-import day1
-import day2
-import day3
-import day4
+import day1, day2, day3, day4, day5
 
 
 def run():
@@ -24,6 +21,11 @@ def run():
     day4.part_one()
     print("Day 4, Part 2:", end=" ")
     day4.part_two()
+
+    print("Day 5, Part 1:", end=" ")
+    day5.part_one()
+    print("Day 5, Part 2:", end=" ")
+    day5.part_two()
 
 
 if __name__ == "__main__":
