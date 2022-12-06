@@ -5,17 +5,21 @@ def get_buffer():
     return file(6, "string")[0]
 
 
-def part_one():
+def get_marker(marker_num):
     buffer = get_buffer()
-    i = 0
+    pos = 0
     while True:
-        curr = buffer[i:4 + i]
+        curr = buffer[pos:marker_num + pos]
         if len(set(curr)) == len(curr):
-            marker = 4 + i
-            break
-        i += 1
-    print(f"The crate sequence that ends up on top is **{marker}**")
+            return marker_num + pos
+        pos += 1
+
+
+def part_one():
+    marker = get_marker(4)
+    print(f"The amount of characters processed before the marker is **{marker}**")
 
 
 def part_two():
-    pass
+    marker = get_marker(14)
+    print(f"The amount of characters processed before the marker is **{marker}**")
