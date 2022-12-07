@@ -4,14 +4,17 @@ from utils.read import read_file
 
 
 def get_inputs():
-    # return read_file(7, "string")
+    return read_file(7, "string")
+
+
+def get_example():
     return [
         "$ cd /",
         "$ ls",
         "dir a",
+        "dir d",
         "14848514 b.txt",
         "8504156 c.dat",
-        "dir d",
         "$ cd a",
         "$ ls",
         "dir e",
@@ -32,61 +35,52 @@ def get_inputs():
     ]
 
 
+class Directory:
+    def __init__(self, parent=None):
+        self.parent = self if parent is None else parent
+        self.directories = {}
+        self.files = []
+        self.size = 0
+
+    def calculate_sizes(self):
+        self.size = sum(file for file in self.files) + sum(dir.calculate_sizes() for dir in self.directories.values())
+        return self.size
+
+    def get_size(self):
+        self.calculate_sizes()
+        sizes = [self.size]
+        for d in self.directories.values():
+            sizes += d.get_size()
+        return sizes
+
+    def to_dict(self):
+        return {"path": self.path, "size": sum(file for file in self.files), "directories": [directory.to_dict() for directory in self.directories]}
+
+
+def create_file_system():
+    root = Directory()
+    current_dir = root
+
+    for line in get_inputs():
+        command = line.split()
+        if command[1] == "cd":
+            if command[2] == "/":
+                current_dir = root
+            elif command[2] == "..":
+                current_dir = current_dir.parent
+            else:
+                current_dir = current_dir.directories[command[2]]
+        elif command[1] != "ls":
+            if command[0] == "dir":
+                current_dir.directories[command[1]] = Directory(current_dir)
+            else:
+                current_dir.files.append(int(command[0]))
+    return root
+
+
 def part_one():
-    input = get_inputs()
-    current_path = ""
-    file_system = []
+    root = create_file_system()
+    sizes = root.get_size()
+    total_sum = sum([size for size in sorted(sizes) if size <= 100000])
+    print(f"The sum of all the directories < 100kb is: {total_sum}")
 
-    for line in input:
-        if line.startswith("$") and "cd" in line:
-            path = line.split(" ")[2]
-            if path == "..":
-                current_path = current_path.rsplit("/", 1)[0]
-                if current_path == "":
-                    current_path = "/"
-            elif path == "/":
-                current_path = "/"
-            else:
-                if current_path == "/":
-                    current_path = f"{current_path}{path}"
-                else:
-                    current_path = f"{current_path}/{path}"
-        elif line == "$ ls":
-            pass
-        else:
-            line_split = line.split(" ")
-            if line_split[0] == "dir":
-                if f"{current_path}" != "/":
-                    file_path = f"{current_path}/{line_split[1]}"
-                else:
-                    file_path = f"{current_path}{line_split[1]}"
-                file = {
-                    "root": current_path,
-                    "file_path": file_path
-                }
-            else:
-                file = {
-                    "root": current_path,
-                    "file_size": int(line_split[0]),
-                    "file_name": line_split[1]
-                }
-            file_system.append(file)
-
-    file_size_system = {}
-    for file in file_system:
-        if file.get("file_size") is not None:
-            root = file.get("root")
-            if file_size_system.get(root) is not None:
-                file_size_system[root] += file.get("file_size")
-            else:
-                file_size_system[root] = file.get("file_size")
-    print(file_size_system)
-
-
-
-
-    # print(f"The amount of characters processed before the marker is **{marker}**")
-
-# def part_two():
-#     marker = get_marker(14)
-#     print(f"The amount of characters processed before the marker is **{marker}**")
