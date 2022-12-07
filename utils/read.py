@@ -1,4 +1,4 @@
-def file(day_number, list_type="string"):
+def read_file(day_number, list_type="string"):
     input_list = []
     f = open(f'inputs/day{day_number}.txt', 'r')
     if list_type == "string":

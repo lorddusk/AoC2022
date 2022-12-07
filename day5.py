@@ -1,8 +1,8 @@
-from utils.read import file
+from utils.read import read_file
 
 
 def get_crates():
-    string_input = file(5, "string")
+    string_input = read_file(5, "string")
 
     # string_input = ["    [D]    ",
     #          "[N] [C]    ",

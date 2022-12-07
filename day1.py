@@ -1,8 +1,8 @@
-from utils.read import file
+from utils.read import read_file
 
 
 def combine_calories():
-    stringInput = file(1, "string")
+    stringInput = read_file(1, "string")
     elves = []
     elf = []
     for line in stringInput:

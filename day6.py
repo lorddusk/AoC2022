@@ -1,8 +1,8 @@
-from utils.read import file
+from utils.read import read_file
 
 
 def get_buffer():
-    return file(6, "string")[0]
+    return read_file(6, "string")[0]
 
 
 def get_marker(marker_num):

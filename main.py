@@ -1,5 +1,5 @@
 import day1, day2, day3, day4, day5
-import day6
+import day6, day7
 
 
 def run():
@@ -26,6 +26,10 @@ def run():
     print("\nDay 6")
     day6.part_one()
     day6.part_two()
+
+    print("\nDay 7")
+    day7.part_one()
+    day7.part_two()
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-from utils.read import file
+from utils.read import read_file
 
 player_one = {"A": 1, "B": 2, "C": 3}
 player_two = {"X": 1, "Y": 2, "Z": 3}
@@ -8,7 +8,7 @@ draw = 3
 
 
 def rock_paper_scissors():
-    string_input = file(2, "string")
+    string_input = read_file(2, "string")
     player_one_input = []
     player_two_input = []
     for line in string_input:

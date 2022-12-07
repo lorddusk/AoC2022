@@ -1,4 +1,4 @@
-from utils.read import file
+from utils.read import read_file
 
 priority_values = {
     "a": 1, "b": 2, "c": 3, "d": 4,
@@ -18,7 +18,7 @@ priority_values = {
 
 
 def get_rucksacks():
-    rucksacks = file(3, "string")
+    rucksacks = read_file(3, "string")
     return rucksacks
 
 

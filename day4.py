@@ -1,8 +1,8 @@
-from utils.read import file
+from utils.read import read_file
 
 
 def get_assignments():
-    assignments = file(4, "string")
+    assignments = read_file(4, "string")
 
     assignments_one = []
     assignments_two = []
