@@ -84,3 +84,9 @@ def part_one():
     total_sum = sum([size for size in sorted(sizes) if size <= 100000])
     print(f"The sum of all the directories < 100kb is: {total_sum}")
 
+
+def part_two():
+    root = create_file_system()
+    sizes = root.get_size()
+    total_sum = next(size for size in sorted(sizes) if size >= sizes[0] - 40000000)
+    print(f"The smallest directory size to delete that frees up at least 40000kb is: {total_sum}")
