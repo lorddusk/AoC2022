@@ -1,38 +1,8 @@
-import json
-
 from utils.read import read_file
 
 
 def get_inputs():
     return read_file(7, "string")
-
-
-def get_example():
-    return [
-        "$ cd /",
-        "$ ls",
-        "dir a",
-        "dir d",
-        "14848514 b.txt",
-        "8504156 c.dat",
-        "$ cd a",
-        "$ ls",
-        "dir e",
-        "29116 f",
-        "2557 g",
-        "62596 h.lst",
-        "$ cd e",
-        "$ ls",
-        "584 i",
-        "$ cd ..",
-        "$ cd ..",
-        "$ cd d",
-        "$ ls",
-        "4060174 j",
-        "8033020 d.log",
-        "5626152 d.ext",
-        "7214296 k",
-    ]
 
 
 class Directory:
@@ -43,7 +13,7 @@ class Directory:
         self.size = 0
 
     def calculate_sizes(self):
-        self.size = sum(file for file in self.files) + sum(dir.calculate_sizes() for dir in self.directories.values())
+        self.size = sum(file for file in self.files) + sum(directory.calculate_sizes() for directory in self.directories.values())
         return self.size
 
     def get_size(self):
@@ -52,9 +22,6 @@ class Directory:
         for d in self.directories.values():
             sizes += d.get_size()
         return sizes
-
-    def to_dict(self):
-        return {"path": self.path, "size": sum(file for file in self.files), "directories": [directory.to_dict() for directory in self.directories]}
 
 
 def create_file_system():
