@@ -44,7 +44,6 @@ def what_row(cycle, pixel, row1, row2, row3, row4, row5, row6):
 
 def move_curr_position(strength, curr_position):
     middle_pixel = curr_position[1]
-    print(middle_pixel, strength)
     middle_pixel += strength
     curr_position = [middle_pixel-1, middle_pixel, middle_pixel+1]
     return curr_position
