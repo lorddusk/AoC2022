@@ -18,7 +18,7 @@ def calculate_cycle(cycle, strengths):
 
 def determine_pixel(cycle, curr_position):
     lit = "\u2588"
-    dark = " "
+    dark = "\u2591"
     if cycle in curr_position:
         pixel = lit
     else:
