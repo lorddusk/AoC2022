@@ -23,3 +23,8 @@ def part_one():
 def part_two():
     marker = get_marker(14)
     print(f"The amount of characters processed before the marker is **{marker}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

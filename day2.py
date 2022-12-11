@@ -78,3 +78,8 @@ def part_two():
             score_player_two += loss
 
     print(f"According to the actual strategy guide, your score would be **{score_player_two}**.")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

@@ -43,3 +43,8 @@ def part_two():
             overlap += 1
 
     print(f"The amount of assignment pairs that have overlap are **{overlap}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

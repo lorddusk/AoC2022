@@ -39,3 +39,8 @@ def part_two():
         common = list(set.intersection(*map(set, rucksacks[group:group+3])))[0]
         priorities += priority_values[common]
     print(f"The sum of the priorities is **{priorities}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

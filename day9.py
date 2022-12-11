@@ -74,3 +74,9 @@ def part_two():
     rope = Rope(10)
     tail_pos = solve(data, rope)
     print(f"The number of unique positions the tail has visited is **{tail_pos}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()
+

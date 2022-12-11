@@ -1,8 +1,5 @@
 import math
-import sys
-
 from utils.read import read_file
-import numexpr as ne
 
 
 def get_inputs():
@@ -68,7 +65,7 @@ def play_rounds(monkeys, amount_of_rounds, worry):
                     operation = monkey['operation']
                     operation = operation.replace("old", str(curr_item))
                     outcome = eval(operation) // worry
-                    test = outcome % int(monkey["test"])
+                    test = outcome % monkey["test"]
                     monkey["starting_items"].remove(curr_item)
                     goto = monkey['true'] if test == 0 else monkey['false']
                     goto_monkey = monkeys[[m['monkey'] for m in monkeys if m['monkey'] == int(goto)][0]]
@@ -96,3 +93,8 @@ def part_two():
     monkeys = get_monkeys(data)
     monkey_business = play_rounds(monkeys, 10000, 1)
     print(f"The level of monkey business is **{monkey_business}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

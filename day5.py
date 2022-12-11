@@ -69,3 +69,8 @@ def part_two():
     for x in crates:
         string += x[0]
     print(f"The crate sequence that ends up on top is **{string}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

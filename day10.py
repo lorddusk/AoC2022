@@ -45,7 +45,7 @@ def what_row(cycle, pixel, row1, row2, row3, row4, row5, row6):
 def move_curr_position(strength, curr_position):
     middle_pixel = curr_position[1]
     middle_pixel += strength
-    curr_position = [middle_pixel-1, middle_pixel, middle_pixel+1]
+    curr_position = [middle_pixel - 1, middle_pixel, middle_pixel + 1]
     return curr_position
 
 
@@ -98,3 +98,8 @@ def part_two():
     print("".join(row4))
     print("".join(row5))
     print("".join(row6))
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

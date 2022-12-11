@@ -24,3 +24,8 @@ def part_two():
     elves = combine_calories()
     amount = sum(sorted(elves, reverse=True)[:3])
     print(f"The 3 elves who are carrying the largest amount of calories, have a combined amount of **{amount}** calories")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

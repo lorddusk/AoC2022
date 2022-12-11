@@ -50,3 +50,8 @@ def part_two():
     data = get_inputs()
     total_trees = max([find_score(data, row, column) for row in range(len(data)) for column in range(len(data))])
     print(f"The highest scenic score for a tree is **{total_trees}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()

@@ -57,3 +57,8 @@ def part_two():
     sizes = root.get_size()
     total_sum = next(size for size in sorted(sizes) if size >= sizes[0] - 40000000)
     print(f"The smallest directory size to delete that frees up at least 40000kb is: **{total_sum}**")
+
+
+if __name__ == "__main__":
+    part_one()
+    part_two()
