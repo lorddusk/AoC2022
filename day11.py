@@ -1,4 +1,5 @@
 import math
+import sys
 
 from utils.read import read_file
 import numexpr as ne
@@ -15,6 +16,10 @@ def get_example():
 def chunks(data):
     for i in range(0, len(data), 7):
         yield data[i:i + 7]
+
+
+def get_modulo(monkeys):
+    return math.lcm(*map(lambda m: m['test'], monkeys))
 
 
 def get_monkeys(data):
@@ -39,7 +44,7 @@ def get_monkeys(data):
                 operation_monkey["operation"] = operation.strip()
             if line.startswith("T"):
                 test = line.split("divisible by ")[1]
-                operation_monkey["test"] = test.strip()
+                operation_monkey["test"] = int(test.strip())
             if "true" in line:
                 true = line.split("throw to monkey ")[1]
                 operation_monkey["true"] = true.strip()
@@ -51,36 +56,43 @@ def get_monkeys(data):
     return operation_monkeys
 
 
-def play_rounds(monkeys, amount_of_rounds):
-    for round in range(1, amount_of_rounds + 1):
+def play_rounds(monkeys, amount_of_rounds, worry):
+    try:
+        modulo = get_modulo(monkeys)
+        for round in range(1, amount_of_rounds + 1):
+            for monkey in monkeys:
+                items = monkey['starting_items']
+                length_items = len(items)
+                for i in range(length_items):
+                    curr_item = items[0]
+                    operation = monkey['operation']
+                    operation = operation.replace("old", str(curr_item))
+                    outcome = eval(operation) // worry
+                    test = outcome % int(monkey["test"])
+                    monkey["starting_items"].remove(curr_item)
+                    goto = monkey['true'] if test == 0 else monkey['false']
+                    goto_monkey = monkeys[[m['monkey'] for m in monkeys if m['monkey'] == int(goto)][0]]
+                    goto_monkey['starting_items'].append(outcome if worry != 1 else outcome % modulo)
+                    monkey['inspected_items'] += 1
+        inspections = []
         for monkey in monkeys:
-            items = monkey['starting_items']
-            length_items = len(items)
-            for i in range(length_items):
-                curr_item = items[0]
-                operation = monkey['operation']
-                operation = operation.replace("old", str(curr_item))
-                outcome = ne.evaluate(operation)
-                new_worry_item = math.floor(outcome / 3)
-                test = new_worry_item % int(monkey["test"])
-                monkey["starting_items"].remove(curr_item)
-                goto = monkey['true'] if test == 0 else monkey['false']
-                goto_monkey = monkeys[[m['monkey'] for m in monkeys if m['monkey'] == int(goto)][0]]
-                goto_monkey['starting_items'].append(new_worry_item)
-                monkey['inspected_items'] += 1
-    inspections = []
-    for monkey in monkeys:
-        inspections.append(int(monkey['inspected_items']))
-    inspections = sorted(inspections, reverse=True)[:2]
-    return inspections[0] * inspections[1]
+            inspections.append(int(monkey['inspected_items']))
+        inspections = sorted(inspections, reverse=True)[:2]
+        return inspections[0] * inspections[1]
+    except Exception as e:
+        print(f"Crashed on {round}")
+        print(e)
 
 
 def part_one():
     data = get_inputs()
     monkeys = get_monkeys(data)
-    monkey_business = play_rounds(monkeys, 20)
+    monkey_business = play_rounds(monkeys, 20, 3)
     print(f"The level of monkey business is **{monkey_business}**")
 
 
 def part_two():
-    pass
+    data = get_inputs()
+    monkeys = get_monkeys(data)
+    monkey_business = play_rounds(monkeys, 10000, 1)
+    print(f"The level of monkey business is **{monkey_business}**")
