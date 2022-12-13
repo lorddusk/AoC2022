@@ -1,4 +1,5 @@
 import math
+from utils.chunks import chunks
 from utils.read import read_file
 
 
@@ -9,18 +10,12 @@ def get_inputs():
 def get_example():
     return read_file("11e", "string")
 
-
-def chunks(data):
-    for i in range(0, len(data), 7):
-        yield data[i:i + 7]
-
-
 def get_modulo(monkeys):
     return math.lcm(*map(lambda m: m['test'], monkeys))
 
 
 def get_monkeys(data):
-    monkeys = list(chunks(data))
+    monkeys = list(chunks(data, 7))
     operation_monkeys = []
     for monkey in monkeys:
         operation_monkey = {}
