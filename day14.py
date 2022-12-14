@@ -8,7 +8,7 @@ def get_inputs():
 
 
 def get_example():
-    return read_file(f"{day}e", "string")
+    return read_file(day, "string", True)
 
 
 def get_rocks(data):

@@ -6,7 +6,7 @@ def get_inputs():
 
 
 def get_example():
-    return read_file("10e", "string")
+    return read_file(10, "string", True)
 
 
 def calculate_cycle(cycle, strengths):

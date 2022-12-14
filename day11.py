@@ -8,7 +8,7 @@ def get_inputs():
 
 
 def get_example():
-    return read_file("11e", "string")
+    return read_file(11, "string", True)
 
 def get_modulo(monkeys):
     return math.lcm(*map(lambda m: m['test'], monkeys))

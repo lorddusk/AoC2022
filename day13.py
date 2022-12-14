@@ -13,7 +13,7 @@ def get_inputs():
 
 
 def get_example():
-    return read_file(f"{day}e", "array")
+    return read_file(day, "array", True)
 
 
 def compare(left, right):
