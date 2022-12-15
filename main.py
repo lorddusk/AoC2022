@@ -2,7 +2,7 @@ import sys
 import time
 from subprocess import Popen, PIPE, STDOUT
 
-current_day = 14
+current_day = 15
 run_all = False
 
 
